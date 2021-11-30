@@ -177,13 +177,13 @@ let make_pop_test_float = fun taille_pop taille_individu ->
 	
 let pop_test = make_pop_test 10 10;;
 
-let copy_pop_test = deep_copy_pop pop_test;;
-
 let test = evol_diff pop_test 1000 close_zero 5 2;;
 
 let pop_test_float = make_pop_test_float 10 10;;
 
-let test = evol_diff_float pop_test_float 1000 close_zero_float 5 0.1;;
+let test = evol_diff_float pop_test_float 1000 close_zero_float 53 0.6;;
+
+
 
 
 let best_individu = fun pop fobj ->
@@ -195,6 +195,8 @@ let best_individu = fun pop fobj ->
 		if aux <(!min) then begin min := aux; indice_min := k end
 	done;
 	!indice_min,!min;;
+	
+let best_test = best_individu test close_zero_float;;
 
 let optim_cr_f = fun nb_gen taille_pop taille_individu fobj ->
 	let pop = ref (make_pop_test_float taille_pop taille_individu) in
@@ -222,6 +224,15 @@ let optim_cr_f = fun nb_gen taille_pop taille_individu fobj ->
 	!bestcr,!bestf,!score;;
 
 let test_optim = optim_cr_f 1000 10 10 close_zero_float;;			
+
+let occurence_optim = fun nb_test nb_gen taille_pop taille_individu fobj ->
+	let occ = Array.make nb_test (0,0.0,0.0) in
+	for k=0 to nb_test-1 do
+		occ.(k)<- (optim_cr_f nb_gen taille_pop taille_individu fobj)
+	done;
+	occ;;
+
+let occ = occurence_optim 20 1000 10 5 close_zero_float;;
 			
 		
 
