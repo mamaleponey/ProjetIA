@@ -2,7 +2,7 @@ open Random;;
 
 Random.self_init;;
 
-
+salut
 let deep_copy_pop = fun pop ->
 	let taille_pop = Array.length pop in
 	let taille_individu = Array.length pop.(0) in
