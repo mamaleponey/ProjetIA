@@ -199,7 +199,7 @@ let conflicts = fun flights_array dmin nb_iter -> 				(* flights_array est un ta
 (*---------- fonctions objectif ----------*)
 
 let fobj = fun trial dirobj f_array ->
-	(*fonction de test pour la detection de conflit, vaut max_float dès qu'il y a un conflit*) 
+	(*fonction objectif*) 
 	let n = Array.length dirobj in 
 	let dmin= 2. *. Util.nm2meter in
 	let ecart = ref 0. in 
@@ -238,7 +238,6 @@ let compute_velocities = fun max_turn_angle dmin plns flying ->
   
   let n = List.length flying in 
 	let norm_vect = gather_norm flying in  
-	
 	if n>0 then
   	let split_zones flying = 
   		let rec aux z1 z2 z3 z4 fl=
